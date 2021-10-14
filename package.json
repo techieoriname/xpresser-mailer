@@ -1,0 +1,20 @@
+{
+  "name": "xpresser-mailer",
+  "version": "0.0.1",
+  "description": "mailer helper for xpresser",
+  "main": "index.js",
+  "author": "Techie Oriname",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "prepublishOnly": "npx tsc"
+  },
+  "dependencies": {
+    "@aws-sdk/client-ses": "^3.36.1",
+    "nodemailer": "^6.7.0"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.4",
+    "xpresser": "^0.22.3"
+  }
+}

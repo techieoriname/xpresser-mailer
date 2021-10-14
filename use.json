@@ -1,0 +1,4 @@
+{
+  "namespace": "mailer",
+  "use_index": "plugin-index.js"
+}
