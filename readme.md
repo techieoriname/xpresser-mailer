@@ -65,11 +65,23 @@ In your controller or anywhere in your project.
 const { sendMail } = require("@techie04/xpresser-mailer");
 
 (async () => {
+    
+    // array of attachments 
+    const attachments = [
+        {
+            // filename (optional)
+            filename: "techieoriname.png",
+            // file path or url
+            path: path.join(__dirname, "..", "TechieOriname.png")
+        }
+    ]
+    
     await sendMail(
         "example@example.com", // to email
         "testing subject", // message subject
         "my message here", // message body
-        "text" // message format ("html" or "text")
+        "text", // message format ("html" or "text")
+        attachments // optional field
     );
 });
 
@@ -77,12 +89,23 @@ const { sendMail } = require("@techie04/xpresser-mailer");
 
 ### Typescript support
 ```typescript
-import { sendMail } from "@techie04/xpresser-mailer";
+import { AttachmentType, sendMail } from "@techie04/xpresser-mailer";
+
+// array of attachments 
+const attachments: AttachmentType[] = [
+    {
+        // filename (optional)
+        filename: "techieoriname.png",
+        // file path or url
+        path: path.join(__dirname, "..", "TechieOriname.png")
+    }
+];
 
 await sendMail(
     "example@example.com",
     "testing subject",
     "my message here",
-    "text"
+    "text",
+    attachments // optional field
 );
 ```

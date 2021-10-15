@@ -1,7 +1,7 @@
 import nodemailer, { SendMailOptions } from "nodemailer";
 import { getInstance } from "xpresser";
 import aws, { SES } from "@aws-sdk/client-ses";
-import { Address, AttachmentLike } from "nodemailer/lib/mailer";
+import { Address, AttachmentLike, Attachment } from "nodemailer/lib/mailer";
 import { Readable } from "stream";
 
 const $ = getInstance();
@@ -43,7 +43,8 @@ export const sendMail = async (
     $to: string | Address | Array<string | Address>,
     $subject: string,
     $message: string | Buffer | Readable | AttachmentLike,
-    $messageType: string = "html"
+    $messageType: string = "html",
+    $attachments?: Attachment[]
 ): Promise<void> => {
     const from = config.get("from") || $.config.get("name");
 
@@ -51,8 +52,11 @@ export const sendMail = async (
         from: `${from} <${config.get("fromEmail")}>`,
         to: $to,
         subject: $subject,
-        ...($messageType === "html" ? { html: $message } : { text: $message })
+        ...($messageType === "html" ? { html: $message } : { text: $message }),
+        ...($attachments && { attachments: $attachments })
     };
 
     await transporter.sendMail(mail);
 };
+
+export type AttachmentType = Attachment;
