@@ -1,6 +1,6 @@
 {
   "name": "@techie04/xpresser-mailer",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "mailer helper for xpresser",
   "main": "index.js",
   "types": "index.d.ts",
