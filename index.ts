@@ -30,7 +30,6 @@ if (config.get("provider") === "AWS") {
     });
 } else if (config.get("provider") === "Postmark") {
     transporter = new postmark.Client(config.get("apiToken"));
-    transporter.sendEmail({});
 } else {
     transporter = nodemailer.createTransport({
         host: config.get("host"),
@@ -59,10 +58,6 @@ export const sendMail = async (
         ...($messageType === "html" ? { html: $message } : { text: $message }),
         ...($attachments && { attachments: $attachments })
     };
-
-    if (config.get("provider") === "Postmark") {
-        await transporter.sendMail({});
-    }
 
     await transporter.sendMail(mail);
 };
