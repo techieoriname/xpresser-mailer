@@ -5,7 +5,7 @@ jobs:
       - image: circleci/node:16
     working_directory: ~/node
     steps:
-      - checkout:
+      - checkout
       - run:
           name: install npm dependencies
           command: |
@@ -13,11 +13,8 @@ jobs:
       - run:
           name: transpile code
           command: |
+            sudo npm install typescript -g
             npx tsc
-      - run:
-          name: run tests
-          command: |
-            npm run test
 workflows:
   build_tests:
     jobs:
