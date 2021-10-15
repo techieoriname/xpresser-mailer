@@ -80,7 +80,7 @@ const { sendMail } = require("@techie04/xpresser-mailer");
 import { sendMail } from "@techie04/xpresser-mailer";
 
 await sendMail(
-    "techieoriname@gmail.com",
+    "example@example.com",
     "testing subject",
     "my message here",
     "text"
