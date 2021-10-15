@@ -9,7 +9,6 @@ jobs:
       - run:
           name: install npm dependencies
           command: |
-            sudo npm i yarn -g
             yarn install
       - run:
           name: transpile code
