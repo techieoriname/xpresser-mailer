@@ -3,6 +3,7 @@ import { getInstance } from "xpresser";
 import aws, { SES } from "@aws-sdk/client-ses";
 import { Address, AttachmentLike, Attachment } from "nodemailer/lib/mailer";
 import { Readable } from "stream";
+import postmark from "postmark";
 
 const $ = getInstance();
 
@@ -27,6 +28,9 @@ if (config.get("provider") === "AWS") {
         SES: { ses, aws },
         sendingRate: config.get("sendingRate") || 1
     });
+} else if (config.get("provider") === "Postmark") {
+    transporter = new postmark.Client(config.get("apiToken"));
+    transporter.sendEmail({});
 } else {
     transporter = nodemailer.createTransport({
         host: config.get("host"),
@@ -55,6 +59,10 @@ export const sendMail = async (
         ...($messageType === "html" ? { html: $message } : { text: $message }),
         ...($attachments && { attachments: $attachments })
     };
+
+    if (config.get("provider") === "Postmark") {
+        await transporter.sendMail({});
+    }
 
     await transporter.sendMail(mail);
 };
