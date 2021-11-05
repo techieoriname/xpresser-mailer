@@ -1,25 +1,29 @@
 import nodemailer, { SendMailOptions } from "nodemailer";
 import { getInstance } from "xpresser";
-import aws, { SES } from "@aws-sdk/client-ses";
 import { Address, AttachmentLike, Attachment } from "nodemailer/lib/mailer";
 import { Readable } from "stream";
-import postmark from "postmark";
+
 
 const $ = getInstance();
 
 // Get config
 const config = $.config.path("mailer");
+const provider = config.get("provider");
 
 let transporter: any;
 
-if (config.get("provider") === "AWS") {
+if (provider === "AWS") {
+    // Only require of provider is AWS
+    const aws = require("@aws-sdk/client-ses") as typeof import("@aws-sdk/client-ses");
+
     process.env.AWS_ACCESS_KEY_ID = config.get("AWS_ACCESS_KEY_ID");
     process.env.AWS_SECRET_ACCESS_KEY = config.get("AWS_SECRET_ACCESS_KEY");
 
     // Set the AWS Region.
     const REGION = config.get("region"); //e.g. "us-east-1"
     // const sesClient = new SESClient({ region: REGION });
-    const ses = new SES({
+
+    const ses = new aws.SES({
         apiVersion: "2010-12-01", // lock api version
         region: REGION
     });
@@ -28,7 +32,8 @@ if (config.get("provider") === "AWS") {
         SES: { ses, aws },
         sendingRate: config.get("sendingRate") || 1
     });
-} else if (config.get("provider") === "Postmark") {
+} else if (provider === "Postmark") {
+    const postmark = require("postmark") as typeof import("postmark");
     transporter = new postmark.Client(config.get("apiToken"));
 } else {
     transporter = nodemailer.createTransport({
