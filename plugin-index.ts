@@ -1,5 +1,5 @@
 import { DollarSign } from "xpresser/types";
-import hasPkg from "has-pkg";
+import { isPackageExists } from "local-pkg";
 
 
 export function run(plugin: any, $: DollarSign) {
@@ -28,7 +28,7 @@ export function run(plugin: any, $: DollarSign) {
         }
 
         if (provider === "AWS") {
-            if (!hasPkg("@aws-sdk/client-ses")) {
+            if (!isPackageExists("@aws-sdk/client-ses")) {
                 $.logWarning(`Package {@aws-sdk/client-ses} is required for AWS`);
                 return $.logErrorAndExit("Install missing package and restart server!");
             }
