@@ -40,7 +40,5 @@ export function run(plugin: any, $: DollarSign) {
                 }
             });
         }
-
-        require("./index");
     });
 }
