@@ -1,6 +1,7 @@
 import { Controller, Http } from "xpresser/types/http";
 import { AttachmentType, sendMail } from "../../index";
 import * as path from "path";
+import { SendMailOptions } from "nodemailer";
 
 /**
  * AppController
@@ -28,13 +29,13 @@ export = <Controller.Object>{
                 }
             ];
 
-            await sendMail(
-                "example@example.com",
-                "testing subject",
-                "my message here",
-                "text",
+            await sendMail<SendMailOptions>({
+                from: "you@example.com",
+                to: "me@example.com",
+                subject: "testing subject",
+                html: "my message here",
                 attachments
-            );
+            });
 
             return http.send({
                 msg: "Email sent successfully"
