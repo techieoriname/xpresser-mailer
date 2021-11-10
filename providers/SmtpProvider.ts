@@ -1,5 +1,6 @@
 import { MailProvider } from "../MailProvider";
 import nodemailer, { SendMailOptions, Transporter } from "nodemailer";
+import { sendMail } from "../index";
 
 // -------- Creating a provider. ---------
 const SmtpProvider = new MailProvider<Transporter, SendMailOptions>("smtp", {
@@ -36,4 +37,13 @@ const SmtpProvider = new MailProvider<Transporter, SendMailOptions>("smtp", {
     }
 });
 
-export = SmtpProvider;
+export default SmtpProvider;
+
+/**
+ * Send mail via smtp
+ * Helper function with types.
+ * @param message
+ */
+export function sendMailViaSmtp(message: SendMailOptions) {
+    return sendMail(message, SmtpProvider.name);
+}

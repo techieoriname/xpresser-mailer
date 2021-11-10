@@ -1,7 +1,8 @@
 import { MailProvider } from "../MailProvider";
 import { Message, ServerClient } from "postmark";
+import { sendMail } from "../index";
 
-export default new MailProvider<ServerClient, Message>("postmark", {
+const PostmarkProvider = new MailProvider<ServerClient, Message>("postmark", {
     initialize(config) {
         config.removeNullOrUndefined();
 
@@ -18,3 +19,14 @@ export default new MailProvider<ServerClient, Message>("postmark", {
         return client.sendEmail(mail);
     }
 });
+
+export default PostmarkProvider;
+
+/**
+ * Send mail via Postmark
+ * Helper function with types.
+ * @param message
+ */
+export function sendMailViaPostmark(message: Message) {
+    return sendMail(message, PostmarkProvider.name);
+}

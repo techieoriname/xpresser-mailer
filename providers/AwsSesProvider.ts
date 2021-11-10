@@ -1,5 +1,6 @@
 import { MailProvider } from "../MailProvider";
 import nodemailer, { SendMailOptions, Transporter } from "nodemailer";
+import { sendMail } from "../index";
 
 // -------- Creating a provider. ---------
 const AwsSesProvider = new MailProvider<Transporter, SendMailOptions>("aws", {
@@ -47,4 +48,13 @@ const AwsSesProvider = new MailProvider<Transporter, SendMailOptions>("aws", {
     }
 });
 
-export = AwsSesProvider;
+export default AwsSesProvider;
+
+/**
+ * Send mail via Aws-SES
+ * Helper function with types.
+ * @param message
+ */
+export function sendMailViaAwsSES(message: SendMailOptions) {
+    return sendMail(message, AwsSesProvider.name);
+}
