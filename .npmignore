@@ -1,4 +1,5 @@
 .idea
+.circleci
 .vscode
 node_modules
 yarn.lock
