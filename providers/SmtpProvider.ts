@@ -14,7 +14,7 @@ const SmtpProvider = new MailProvider<Transporter, SendMailOptions>("smtp", {
 
         // Check for required keys.
         for (const val of ["host", "port", "username", "password", "fromEmail"]) {
-            if (!config.has(val)) {
+            if (!config.get(val)) {
                 throw new Error(`Mailer smtp config: {${val}} is missing!`);
             }
         }

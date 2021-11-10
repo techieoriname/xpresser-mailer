@@ -1,6 +1,29 @@
-import { DollarSign, PluginData } from "xpresser/types";
-import { MailProvider } from "./MailProvider";
+import type { DollarSign, PluginData } from "xpresser/types";
+import type { MailProvider } from "./MailProvider";
 
+/**
+ * Define Plugin Dependencies.
+ * @param plugin
+ * @param $
+ */
+export function dependsOn(plugin: PluginData, $: DollarSign) {
+    const provider = $.config.get(`${plugin.namespace}.provider`);
+
+    switch (provider) {
+        case "aws":
+            return ["@aws-sdk/client-ses"];
+        case "postmark":
+            return ["postmark"];
+        default:
+            return [];
+    }
+}
+
+/**
+ * Plugin run function.
+ * @param plugin
+ * @param $
+ */
 export async function run(plugin: PluginData, $: DollarSign) {
     // Do nothing if native command e.g 'make:controller'
     if ($.isNativeCliCommand()) return;
@@ -34,7 +57,9 @@ export async function run(plugin: PluginData, $: DollarSign) {
      * Out of the box providers.
      */
     const Providers = {
-        smtp: plugin.path + "/providers/SmtpProvider"
+        smtp: plugin.path + "/providers/SmtpProvider",
+        aws: plugin.path + "/providers/AwsSesProvider",
+        postmark: plugin.path + "/providers/PostmarkProvider"
     };
 
     /**
@@ -51,7 +76,9 @@ export async function run(plugin: PluginData, $: DollarSign) {
      */
     for (const [provider, providerPath] of Object.entries(Providers)) {
         try {
-            const p = require($.path.resolve(providerPath));
+            let p = require($.path.resolve(providerPath));
+            // for esm export default support.
+            if (p.default) p = p.default;
 
             // Store resolved provider.
             resolvedProviders.set(provider, p);

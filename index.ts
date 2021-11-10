@@ -1,5 +1,5 @@
 import { getInstance } from "xpresser";
-import { MailProvider } from "./MailProvider";
+import type { MailProvider } from "./MailProvider";
 
 const $ = getInstance();
 
