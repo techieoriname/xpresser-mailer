@@ -71,55 +71,24 @@ yarn add @techie04/xpresser-mailer
 
 In your controller or anywhere in your project.
 
+###### Javascript
+
 ```javascript
 const { sendMail } = require("@techie04/xpresser-mailer");
 
-(async () => {
-    
-    // array of attachments 
-    const attachments = [
-        {
-            // filename (optional)
-            filename: "techieoriname.png",
-            // file path or url
-            path: path.join(__dirname, "..", "TechieOriname.png")
-        }
-    ]
-    
-    await sendMail(
-        "example@example.com", // to email
-        "testing subject", // message subject
-        "my message here", // message body
-        "text", // message format ("html" or "text")
-        attachments // optional field
-    );
-});
-
+await sendMail(message);
 ```
 
-### Typescript support
+###### Typescript
 
 ```typescript
-import { AttachmentType, sendMail } from "@techie04/xpresser-mailer";
+import { sendMail } from "@techie04/xpresser-mailer";
 
-// array of attachments 
-const attachments: AttachmentType[] = [
-    {
-        // filename (optional)
-        filename: "techieoriname.png",
-        // file path or url
-        path: path.join(__dirname, "..", "TechieOriname.png")
-    }
-];
-
-await sendMail(
-    "example@example.com",
-    "testing subject",
-    "my message here",
-    "text",
-    attachments // optional field
-);
+await sendMail<Message, MessageResponse>(message);
 ```
+
+- **Message:** Type of message content (depending on provider)
+- **MessageResponse:** Type of response returned to the `sendMail` function (depending on provider)
 
 ### Creating a custom provider
 
@@ -153,4 +122,18 @@ const CustomProvider = new MailProvider("customProvider", {
 });
 
 export default PostmarkProvider;
+```
+
+###### Add to config
+```javascript
+const config = {
+    "mailer": {
+        // ... other configs
+        customProviders: {
+            // key is providers name
+            // value is path to provider file without .js or .ts
+            customProvider: "providers/CustomProvider"
+        }
+    }
+}
 ```
