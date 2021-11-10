@@ -1,6 +1,7 @@
 import { init } from "xpresser";
+import envLoader from "@xpresser/env";
+const env = envLoader(__dirname + "/.env", { required: ["MAIL_PROVIDER"] });
 
-const env = {} as Record<string, any>;
 /**
  * Initialize Xpresser.
  */
@@ -17,24 +18,16 @@ const $ = init({
 
     // Plugin Config
     mailer: {
-        provider: "smtp",
+        provider: env["MAIL_PROVIDER"],
         configs: {
             smtp: {
-                hello: null,
-                host: "smtp.host.com",
-                port: 2525,
-                username: "username",
-                password: "password",
-                fromEmail: "no-reply@example.com"
-            },
-
-            mailgun: {
-                domain: env["MAILGUN_DOMAIN"],
-                secret: env["MAILGUN_SECRET"],
-                endpoint: "api.eu.mailgun.net"
+                host: env["SMTP_HOST"],
+                port: env["SMTP_PORT"],
+                username: env["SMTP_USERNAME"],
+                password: env["SMTP_PASSWORD"],
+                fromEmail: env["SMTP_FROM_EMAIL"]
             }
         }
-        // customProviders: {a: 1, b: 2}
     }
 }).initializeTypescript(__filename);
 

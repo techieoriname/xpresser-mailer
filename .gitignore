@@ -8,3 +8,4 @@ dist
 # exclude build files
 *.js
 *.d.ts
+*.env

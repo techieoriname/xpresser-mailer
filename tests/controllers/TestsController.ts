@@ -1,7 +1,8 @@
 import { Controller, Http } from "xpresser/types/http";
-import { AttachmentType, sendMail } from "../../index";
+import { sendMail } from "../../index";
 import * as path from "path";
 import { SendMailOptions } from "nodemailer";
+import { Attachment } from "nodemailer/lib/mailer";
 
 /**
  * AppController
@@ -20,7 +21,7 @@ export = <Controller.Object>{
      */
     async index(http: Http): Promise<Http.Response> {
         try {
-            const attachments: AttachmentType[] = [
+            const attachments: Attachment[] = [
                 {
                     // filename (optional)
                     filename: "techieoriname.png",
