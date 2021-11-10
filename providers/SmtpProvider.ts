@@ -7,9 +7,8 @@ const SmtpProvider = new MailProvider<Transporter, SendMailOptions>("smtp", {
      * Initialize
      * Validate Config and Return Client/Transporter
      * @param config
-     * @param $
      */
-    initialize(config, $) {
+    initialize(config) {
         // Remove null or undefined values.
         config.removeNullOrUndefined();
 
@@ -19,8 +18,6 @@ const SmtpProvider = new MailProvider<Transporter, SendMailOptions>("smtp", {
                 throw new Error(`Mailer smtp config: {${val}} is missing!`);
             }
         }
-
-        if (!config.has("from")) config.set("from", $.config.get("name"));
 
         // Return client.
         return nodemailer.createTransport({
@@ -35,8 +32,6 @@ const SmtpProvider = new MailProvider<Transporter, SendMailOptions>("smtp", {
     },
 
     sendMail({ mail, client }) {
-        console.log(mail);
-
         return client.sendMail(mail);
     }
 });
