@@ -4,11 +4,6 @@ import { sendMail } from "../index";
 
 // -------- Creating a provider. ---------
 const SmtpProvider = new MailProvider<Transporter, SendMailOptions>("smtp", {
-    /**
-     * Initialize
-     * Validate Config and Return Client/Transporter
-     * @param config
-     */
     initialize(config) {
         // Remove null or undefined values.
         config.removeNullOrUndefined();

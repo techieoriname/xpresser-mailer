@@ -15,6 +15,7 @@ const PostmarkProvider = new MailProvider<ServerClient, Message>("postmark", {
         // Initialize and return client
         return new postmark.Client(config.get("apiToken"));
     },
+
     sendMail({ mail, client }) {
         return client.sendEmail(mail);
     }

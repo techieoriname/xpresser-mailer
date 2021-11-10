@@ -4,13 +4,7 @@ import { sendMail } from "../index";
 
 // -------- Creating a provider. ---------
 const AwsSesProvider = new MailProvider<Transporter, SendMailOptions>("aws", {
-    /**
-     * Initialize
-     * Validate Config and Return Client/Transporter
-     * @param config
-     * @param $
-     */
-    initialize(config, $) {
+    initialize(config) {
         // Remove null or undefined values.
         config.removeNullOrUndefined();
 

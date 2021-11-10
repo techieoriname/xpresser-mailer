@@ -121,7 +121,7 @@ const CustomProvider = new MailProvider("customProvider", {
     }
 });
 
-export default PostmarkProvider;
+export default CustomProvider;
 ```
 
 ###### Add to config
