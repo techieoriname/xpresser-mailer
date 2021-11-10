@@ -1,12 +1,14 @@
 import { init } from "xpresser";
 import envLoader from "@xpresser/env";
-const env = envLoader(__dirname + "/.env", { required: ["MAIL_PROVIDER"] });
+const env = envLoader(__dirname + "/.env", {
+    required: ["MAIL_PROVIDER"]
+});
 
 /**
  * Initialize Xpresser.
  */
 const $ = init({
-    name: "Test Mailer Plugin",
+    name: "Xpresser Mailer",
     env: "development",
 
     // Set Paths

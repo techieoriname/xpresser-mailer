@@ -30,7 +30,7 @@ export = <Controller.Object>{
                 }
             ];
 
-            await sendMail<SendMailOptions>({
+            const mail = await sendMail<SendMailOptions>({
                 from: "you@example.com",
                 to: "me@example.com",
                 subject: "testing subject",
@@ -39,6 +39,7 @@ export = <Controller.Object>{
             });
 
             return http.send({
+                mail,
                 msg: "Email sent successfully"
             });
         } catch (e) {

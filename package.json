@@ -1,7 +1,7 @@
 {
   "name": "@techie04/xpresser-mailer",
   "version": "0.1.1",
-  "description": "mailer helper for xpresser",
+  "description": "Mailer Plugin for xpresser",
   "main": "index.js",
   "types": "index.d.ts",
   "repository": "https://github.com/techieoriname/xpresser-mailer.git",
@@ -25,5 +25,13 @@
     "prettier": "^2.4.1",
     "typescript": "^4.4.4",
     "xpresser": "^0.24.0"
-  }
+  },
+  "keywords": [
+    "xpresser",
+    "techie",
+    "mailer",
+    "nodemailer",
+    "postmark",
+    "client-ses"
+  ]
 }
