@@ -1,5 +1,5 @@
+import type { Message, ServerClient } from "postmark";
 import { MailProvider } from "../MailProvider";
-import { Message, ServerClient } from "postmark";
 import { sendMail } from "../index";
 
 const PostmarkProvider = new MailProvider<ServerClient, Message>("postmark", {
