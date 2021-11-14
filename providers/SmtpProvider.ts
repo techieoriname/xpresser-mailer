@@ -27,7 +27,9 @@ const SmtpProvider = new MailProvider<Transporter, SendMailOptions>("smtp", {
         });
     },
 
-    sendMail({ mail, client }) {
+    sendMail({ mail, client, config }) {
+        if (!mail.from) mail.from = config.get("fromEmail");
+
         return client.sendMail(mail);
     }
 });
