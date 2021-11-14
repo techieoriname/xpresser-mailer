@@ -17,7 +17,7 @@
     "nodemailer": "^6.7.0"
   },
   "devDependencies": {
-    "@aws-sdk/client-ses": "^3.36.1",
+    "@aws-sdk/client-ses": "^3.41.0",
     "@types/nodemailer": "^6.4.4",
     "@xpresser/env": "^1.1.0",
     "postmark": "^2.7.8",
