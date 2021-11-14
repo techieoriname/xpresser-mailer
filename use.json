@@ -1,4 +1,5 @@
 {
+  "xpresser": ">=0.24.0",
   "namespace": "mailer",
   "use_index": "plugin-index.js"
 }
