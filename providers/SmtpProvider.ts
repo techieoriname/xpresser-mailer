@@ -1,30 +1,27 @@
 import { MailProvider } from "../MailProvider";
 import nodemailer, { SendMailOptions, Transporter } from "nodemailer";
 import { sendMail } from "../index";
+import { Abolish } from "abolish";
 
 // -------- Creating a provider. ---------
 const SmtpProvider = new MailProvider<Transporter, SendMailOptions>("smtp", {
     initialize(config) {
-        // Remove null or undefined values.
-        config.removeNullOrUndefined();
+        /**
+         * Validate Config Object
+         */
+        const [err] = Abolish.validate(config.data, {
+            // all is required and must be typeof string
+            "*": "required|typeof:string",
+            host: { $name: "{host}" },
+            port: { $name: "{port}", typeof: false },
+            "auth.user": { $name: "{auth.user}" },
+            "auth.pass": { $name: "{auth.pass}" }
+        });
 
-        // Check for required keys.
-        for (const val of ["host", "port", "username", "password", "fromEmail"]) {
-            if (!config.get(val)) {
-                throw new Error(`Mailer smtp config: {${val}} is missing!`);
-            }
-        }
+        if (err) throw new Error(`Smtp Config: ${err.message}`);
 
         // Return client.
-        return nodemailer.createTransport({
-            host: config.get("host"),
-            port: config.get("port"),
-            ...(config.get("port") === 465 ? { secure: true } : { secure: false }),
-            auth: {
-                user: config.get("username"),
-                pass: config.get("password")
-            }
-        });
+        return nodemailer.createTransport(config.data);
     },
 
     sendMail({ mail, client, config }) {

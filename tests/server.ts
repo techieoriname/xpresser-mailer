@@ -24,9 +24,8 @@ const $ = init({
         configs: {
             smtp: {
                 host: env["SMTP_HOST"],
-                port: env["SMTP_PORT"],
-                username: env["SMTP_USERNAME"],
-                password: env["SMTP_PASSWORD"],
+                port: Number(env["SMTP_PORT"]),
+                auth: { user: env["SMTP_USERNAME"], pass: env["SMTP_PASSWORD"] },
                 fromEmail: env["SMTP_FROM_EMAIL"]
             },
 
