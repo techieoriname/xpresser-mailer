@@ -41,9 +41,6 @@ class MailProvider<Client = any, Mail = any> {
         // Get mail config
         const providerConfig = $.config.path(`mailer.configs.${this.name}`);
 
-        if (!(mail as any).from)
-            (mail as any).from = providerConfig.get("from") || $.config.get("name");
-
         // Run custom function defined..
         return this.setup.sendMail(
             {
