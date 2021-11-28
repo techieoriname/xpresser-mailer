@@ -42,12 +42,14 @@ yarn add @techie04/xpresser-mailer
     "mailer": {
         provider: "SMTP", // SMTP
         configs: {
+            // Smtp config inherits nodemailers's config.
             smtp: {
                 host: "", // SMTP Server Host
                 port: "", // SMTP Server Port
-                username: "", // SMTP Server Username
-                password: "", // SMTP Server Password
-                fromEmail: "no-reply@example.com" // From email
+                auth: {
+                    user: "", // SMTP Server Username
+                    pass: "", // SMTP Server Password
+                }
             },
             
             aws: {
