@@ -49,7 +49,8 @@ yarn add @techie04/xpresser-mailer
                 auth: {
                     user: "", // SMTP Server Username
                     pass: "", // SMTP Server Password
-                }
+                },
+                fromEmail: "", // Sender Email
             },
             
             aws: {
