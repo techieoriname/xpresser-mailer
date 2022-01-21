@@ -40,7 +40,7 @@ yarn add @techie04/xpresser-mailer
 ({
     // SMTP CONFIG
     "mailer": {
-        provider: "SMTP", // SMTP
+        provider: "smtp", // smtp, ses,postmark
         configs: {
             // Smtp config inherits nodemailers's config.
             smtp: {
@@ -49,7 +49,8 @@ yarn add @techie04/xpresser-mailer
                 auth: {
                     user: "", // SMTP Server Username
                     pass: "", // SMTP Server Password
-                }
+                },
+                fromEmail: "", // Sender Email
             },
             
             aws: {
@@ -127,6 +128,7 @@ export default CustomProvider;
 ```
 
 ###### Add to config
+
 ```javascript
 const config = {
     "mailer": {
