@@ -1,9 +1,9 @@
-import { Controller, Http } from "xpresser/types/http";
-import { sendMail } from "../../index";
-import * as path from "path";
-import { SendMailOptions } from "nodemailer";
-import { Attachment } from "nodemailer/lib/mailer";
-import { Message } from "postmark";
+import type {Controller, Http} from "xpresser/types/http";
+import {sendMail} from "../../index";
+import path from "path";
+import type {SendMailOptions} from "nodemailer";
+import type {Attachment} from "nodemailer/lib/mailer";
+import type {Message} from "postmark";
 
 const attachments: Attachment[] = [
     {
@@ -22,7 +22,7 @@ export = <Controller.Object>{
     name: "AppController",
 
     // Controller Default Error Handler.
-    e: (http: Http, error: string) => http.status(401).json({ error }),
+    e: (http: Http, error: string) => http.status(401).json({error}),
 
     index(http) {
         const $ = http.$instance();
