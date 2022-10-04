@@ -28,7 +28,6 @@ const $ = init({
                 auth: { user: env["SMTP_USERNAME"], pass: env["SMTP_PASSWORD"] },
                 fromEmail: env["SMTP_FROM_EMAIL"]
             },
-
             postmark: {
                 apiToken: env["POSTMARK_API_TOKEN"]
             }
