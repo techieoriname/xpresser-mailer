@@ -1,6 +1,7 @@
 import { init } from "xpresser";
-import envLoader from "@xpresser/env";
-const env = envLoader(__dirname + "/.env", {
+import {LoadEnv} from "@xpresser/env";
+// Get Env
+const env = LoadEnv(__dirname + "/.env", {
     required: ["MAIL_PROVIDER"]
 });
 
