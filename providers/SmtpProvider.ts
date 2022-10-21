@@ -1,7 +1,7 @@
 import { MailProvider } from "../MailProvider";
 import nodemailer, { SendMailOptions, Transporter } from "nodemailer";
 import { sendMail } from "../index";
-import { Abolish } from "abolish";
+import { Abolish, Schema } from "abolish";
 
 // -------- Creating a provider. ---------
 const SmtpProvider = new MailProvider<Transporter, SendMailOptions>("smtp", {
@@ -9,14 +9,14 @@ const SmtpProvider = new MailProvider<Transporter, SendMailOptions>("smtp", {
         /**
          * Validate Config Object
          */
-        const [err] = Abolish.validate(config.data, {
+        const [err] = Abolish.validate(config.data, Schema({
             // all is required and must be typeof string
             "*": "required|typeof:string",
             host: { $name: "{host}" },
             port: { $name: "{port}", typeof: false },
             "auth.user": { $name: "{auth.user}" },
             "auth.pass": { $name: "{auth.pass}" }
-        });
+        }));
 
         if (err) throw new Error(`Smtp Config: ${err.message}`);
 

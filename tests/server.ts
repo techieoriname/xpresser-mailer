@@ -1,6 +1,7 @@
 import { init } from "xpresser";
-import envLoader from "@xpresser/env";
-const env = envLoader(__dirname + "/.env", {
+import {LoadEnv} from "@xpresser/env";
+// Get Env
+const env = LoadEnv(__dirname + "/.env", {
     required: ["MAIL_PROVIDER"]
 });
 
@@ -28,7 +29,6 @@ const $ = init({
                 auth: { user: env["SMTP_USERNAME"], pass: env["SMTP_PASSWORD"] },
                 fromEmail: env["SMTP_FROM_EMAIL"]
             },
-
             postmark: {
                 apiToken: env["POSTMARK_API_TOKEN"]
             }
